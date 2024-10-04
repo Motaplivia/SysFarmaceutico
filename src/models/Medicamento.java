@@ -16,6 +16,9 @@ public class Medicamento {
         this.fornecedor = fornecedor;
     }
 
+    public Medicamento(String nome, String codigo, String preco, int quantidade) {
+    }
+
     public int getId() {
         return id;
     }

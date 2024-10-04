@@ -1,12 +1,15 @@
 package models;
 
-public class Fornecedor extends Pessoa {
+public class Fornecedor {
     private String cnpj;
 
 
     public Fornecedor(int id, String nome, String telefone, String cnpj) {
-        super(id, nome, telefone);
+        //super();
         this.cnpj = cnpj;
+    }
+
+    public Fornecedor(String nome, String cnpj, String telefone) {
     }
 
 
@@ -21,8 +24,7 @@ public class Fornecedor extends Pessoa {
 
 
     public void cadastrarFornecedor() {
-        // System.out.println("Fornecedor cadastrado: " + getNome());
-    }
+        }
 
     public void editarFornecedor() {
         // System.out.println("Fornecedor editado: " + getNome());

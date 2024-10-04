@@ -1,26 +1,23 @@
 package view;
 
-import models.Medicamento;
-
+import models.Fornecedor;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MedicamentoGUI extends JFrame {
+public class FornecedorGUI extends JFrame {
     private JTextField nomeField;
-    private JTextField codigoField;
-    private JTextField precoField;
-    private JTextField quantidadeField;
+    private JTextField cnpjField;
+    private JTextField telefoneField;
     private JTextArea listArea;
 
-    public MedicamentoGUI() {
-        setTitle("Gerenciamento de Medicamentos");
+    public FornecedorGUI() {
+        setTitle("Gerenciamento de Fornecedores");
         setSize(1200, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Painel lateral para navegação
         JPanel menuPanel = new JPanel();
         menuPanel.setLayout(new GridLayout(4, 1));
         JButton clienteButton = new JButton("Cliente");
@@ -33,7 +30,6 @@ public class MedicamentoGUI extends JFrame {
         menuPanel.add(vendasButton);
         menuPanel.add(medicamentosButton);
 
-        // Painel de entrada e botões
         JPanel actionPanel = new JPanel();
         actionPanel.setLayout(new BorderLayout());
 
@@ -42,7 +38,6 @@ public class MedicamentoGUI extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
 
-        // Campos de entrada
         gbc.gridx = 0;
         gbc.gridy = 0;
         JLabel nomeLabel = new JLabel("Nome:");
@@ -55,35 +50,24 @@ public class MedicamentoGUI extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        JLabel codigoLabel = new JLabel("Código:");
-        inputPanel.add(codigoLabel, gbc);
+        JLabel cnpjLabel = new JLabel("CNPJ:");
+        inputPanel.add(cnpjLabel, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 1;
-        codigoField = new JTextField(20);
-        inputPanel.add(codigoField, gbc);
+        cnpjField = new JTextField(20);
+        inputPanel.add(cnpjField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;
-        JLabel precoLabel = new JLabel("Preço:");
-        inputPanel.add(precoLabel, gbc);
+        JLabel telefoneLabel = new JLabel("Telefone:");
+        inputPanel.add(telefoneLabel, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 2;
-        precoField = new JTextField(20);
-        inputPanel.add(precoField, gbc);
+        telefoneField = new JTextField(20);
+        inputPanel.add(telefoneField, gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        JLabel quantidadeLabel = new JLabel("Quantidade:");
-        inputPanel.add(quantidadeLabel, gbc);
-
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        quantidadeField = new JTextField(20);
-        inputPanel.add(quantidadeField, gbc);
-
-        // Botões de ação
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 4));
         JButton cadastrarButton = new JButton("Cadastrar");
@@ -99,7 +83,6 @@ public class MedicamentoGUI extends JFrame {
         actionPanel.add(inputPanel, BorderLayout.CENTER);
         actionPanel.add(buttonPanel, BorderLayout.SOUTH);
 
-        // Área de listagem
         listArea = new JTextArea(10, 40);
         listArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(listArea);
@@ -108,19 +91,10 @@ public class MedicamentoGUI extends JFrame {
         add(actionPanel, BorderLayout.CENTER);
         add(scrollPane, BorderLayout.SOUTH);
 
-        // Ações de navegação
         clienteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ClienteGUI();
-                dispose();
-            }
-        });
-
-        fornecedorButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new FornecedorGUI();
                 dispose();
             }
         });
@@ -133,69 +107,74 @@ public class MedicamentoGUI extends JFrame {
             }
         });
 
-        // Ações CRUD
+        medicamentosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MedicamentoGUI();
+                dispose();
+            }
+        });
+
         cadastrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cadastrarMedicamento();
+                cadastrarFornecedor();
             }
         });
 
         listarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                listarMedicamentos();
+                listarFornecedores();
             }
         });
 
         atualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                atualizarMedicamento();
+                atualizarFornecedor();
             }
         });
 
         removerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                removerMedicamento();
+                removerFornecedor();
             }
         });
 
         setVisible(true);
     }
 
-    private void cadastrarMedicamento() {
+    private void cadastrarFornecedor() {
         String nome = nomeField.getText();
-        String codigo = codigoField.getText();
-        String preco = precoField.getText();
-        String quantidade = quantidadeField.getText();
-        Medicamento medicamento = new Medicamento(nome, codigo, preco, Integer.parseInt(quantidade));
-        JOptionPane.showMessageDialog(this, "Medicamento cadastrado com sucesso!");
+        String cnpj = cnpjField.getText();
+        String telefone = telefoneField.getText();
+        Fornecedor fornecedor = new Fornecedor(nome, cnpj, telefone);
+        JOptionPane.showMessageDialog(this, "Fornecedor cadastrado com sucesso!");
         clearFields();
     }
 
-    private void listarMedicamentos() {
+    private void listarFornecedores() {
         listArea.setText("");
-        // Lógica para listar medicamentos
+        // Lógica para listar fornecedores (de acordo com a estrutura de dados implementada)
     }
 
-    private void atualizarMedicamento() {
-        // Lógica para atualizar medicamento
+    private void atualizarFornecedor() {
+        // Lógica para atualizar fornecedores
     }
 
-    private void removerMedicamento() {
-        // Lógica para remover medicamento
+    private void removerFornecedor() {
+        // Lógica para remover fornecedores
     }
 
     private void clearFields() {
         nomeField.setText("");
-        codigoField.setText("");
-        precoField.setText("");
-        quantidadeField.setText("");
+        cnpjField.setText("");
+        telefoneField.setText("");
     }
 
     public static void main(String[] args) {
-        new MedicamentoGUI();
+        new FornecedorGUI();
     }
 }

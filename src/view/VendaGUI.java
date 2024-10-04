@@ -1,21 +1,21 @@
 package view;
 
-import models.Medicamento;
+import models.Venda;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MedicamentoGUI extends JFrame {
-    private JTextField nomeField;
-    private JTextField codigoField;
-    private JTextField precoField;
+public class VendaGUI extends JFrame {
+    private JTextField clienteField;
+    private JTextField medicamentoField;
     private JTextField quantidadeField;
+    private JTextField precoField;
     private JTextArea listArea;
 
-    public MedicamentoGUI() {
-        setTitle("Gerenciamento de Medicamentos");
+    public VendaGUI() {
+        setTitle("Gerenciamento de Vendas");
         setSize(1200, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -45,43 +45,43 @@ public class MedicamentoGUI extends JFrame {
         // Campos de entrada
         gbc.gridx = 0;
         gbc.gridy = 0;
-        JLabel nomeLabel = new JLabel("Nome:");
-        inputPanel.add(nomeLabel, gbc);
+        JLabel clienteLabel = new JLabel("Cliente:");
+        inputPanel.add(clienteLabel, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        nomeField = new JTextField(20);
-        inputPanel.add(nomeField, gbc);
+        clienteField = new JTextField(20);
+        inputPanel.add(clienteField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        JLabel codigoLabel = new JLabel("Código:");
-        inputPanel.add(codigoLabel, gbc);
+        JLabel medicamentoLabel = new JLabel("Medicamento:");
+        inputPanel.add(medicamentoLabel, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 1;
-        codigoField = new JTextField(20);
-        inputPanel.add(codigoField, gbc);
+        medicamentoField = new JTextField(20);
+        inputPanel.add(medicamentoField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;
-        JLabel precoLabel = new JLabel("Preço:");
-        inputPanel.add(precoLabel, gbc);
-
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        precoField = new JTextField(20);
-        inputPanel.add(precoField, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 3;
         JLabel quantidadeLabel = new JLabel("Quantidade:");
         inputPanel.add(quantidadeLabel, gbc);
 
         gbc.gridx = 1;
-        gbc.gridy = 3;
+        gbc.gridy = 2;
         quantidadeField = new JTextField(20);
         inputPanel.add(quantidadeField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        JLabel precoLabel = new JLabel("Preço:");
+        inputPanel.add(precoLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        precoField = new JTextField(20);
+        inputPanel.add(precoField, gbc);
 
         // Botões de ação
         JPanel buttonPanel = new JPanel();
@@ -125,10 +125,10 @@ public class MedicamentoGUI extends JFrame {
             }
         });
 
-        vendasButton.addActionListener(new ActionListener() {
+        medicamentosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new VendaGUI();
+                new MedicamentoGUI();
                 dispose();
             }
         });
@@ -137,65 +137,65 @@ public class MedicamentoGUI extends JFrame {
         cadastrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cadastrarMedicamento();
+                cadastrarVenda();
             }
         });
 
         listarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                listarMedicamentos();
+                listarVendas();
             }
         });
 
         atualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                atualizarMedicamento();
+                atualizarVenda();
             }
         });
 
         removerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                removerMedicamento();
+                removerVenda();
             }
         });
 
         setVisible(true);
     }
 
-    private void cadastrarMedicamento() {
-        String nome = nomeField.getText();
-        String codigo = codigoField.getText();
-        String preco = precoField.getText();
+    private void cadastrarVenda() {
+        String cliente = clienteField.getText();
+        String medicamento = medicamentoField.getText();
         String quantidade = quantidadeField.getText();
-        Medicamento medicamento = new Medicamento(nome, codigo, preco, Integer.parseInt(quantidade));
-        JOptionPane.showMessageDialog(this, "Medicamento cadastrado com sucesso!");
+        String preco = precoField.getText();
+        Venda venda = new Venda(cliente, medicamento, Integer.parseInt(quantidade), Double.parseDouble(preco));
+        JOptionPane.showMessageDialog(this, "Venda cadastrada com sucesso!");
         clearFields();
     }
 
-    private void listarMedicamentos() {
+    private void listarVendas() {
         listArea.setText("");
-        // Lógica para listar medicamentos
+        // Lógica para listar vendas
     }
 
-    private void atualizarMedicamento() {
-        // Lógica para atualizar medicamento
+    private void atualizarVenda() {
+        // Lógica para atualizar vendas
     }
 
-    private void removerMedicamento() {
-        // Lógica para remover medicamento
+    private void removerVenda() {
+        // Lógica para remover vendas
     }
 
     private void clearFields() {
-        nomeField.setText("");
-        codigoField.setText("");
-        precoField.setText("");
+        clienteField.setText("");
+        medicamentoField.setText("");
         quantidadeField.setText("");
+        precoField.setText("");
     }
 
     public static void main(String[] args) {
-        new MedicamentoGUI();
+        new VendaGUI();
     }
 }
